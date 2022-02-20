@@ -1,23 +1,17 @@
 const path = require('path');
 
 const express = require('express');
-const bodyParser = require('body-parser');
 
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
+const homeRoutes = require('./routes/home');
+const usersRoutes = require('./routes/users');
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false })); //this registers a middleware that will do all the body parsing
+//static files -> access to public folder
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.static(path.join(__dirname, 'public'))); //grants read access to the folder we pass to the function
+// routing
+app.use(homeRoutes);
+app.use(usersRoutes);
 
-app.use('/admin', adminRoutes);
-app.use(shopRoutes);
-
-//404 page
-app.use('/', (req, res, next) => {
-  res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-})
-
-app.listen(3000);
+app.listen(3000)
