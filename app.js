@@ -1,18 +1,22 @@
-const express = require('express');
+const express = require ('express');
 
 const app = express();
 
-// .use allows us to pass a new middleware function, the function you pass to it will be executed for every incoming request.
-// to allow it to travel on to the next middleware line, we have to call next()
-app.use((req, res, next) => {
-  console.log('hey this is the first middleware');
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log('this is the first middleware');
+//   next();
+// })
 
-app.use((req, res, next) => {
-  console.log('hey this is the second middleware');
+// app.use((req, res, next) => {
+//   console.log('and this is the second');
+// })
 
-  res.send('<h1>Hello from express</h1>');
-});
+app.use('/users', (req, res, next) => {
+  res.send('<p>this is the users page</p>')
+})
+
+app.use('/', (req, res, next) => {
+  res.send('<p>this is the home page</p>')
+})
 
 app.listen(3000);
