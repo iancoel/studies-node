@@ -10,6 +10,8 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false })); //this registers a middleware that will do all the body parsing
 
+app.use(express.static(path.join(__dirname, 'public'))); //grants read access to the folder we pass to the function
+
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
