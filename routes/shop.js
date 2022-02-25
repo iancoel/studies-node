@@ -9,7 +9,10 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
   console.log('Aqui é em shop.js: ', adminData.products);
-  res.render('shop') //render() will use the default template engine
+
+  const products = adminData.products
+
+  res.render('shop', {prods: products, docTitle: 'Shop'}) //render() will use the default template engine
 });
 
 module.exports = router;
