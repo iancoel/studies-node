@@ -9,7 +9,7 @@ const shopRoutes = require('./routes/shop');
 
 const app = express();
 
-app.engine('hbs', expressHbs())// we use this to set a template engine that is not built-in like pug
+app.engine('hbs', expressHbs({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout', extname: 'hbs'}))// we use this to set a template engine that is not built-in like pug
 
 app.set('view engine', 'hbs'); //.set() allows to set any value globally on our application and we can read them with .get()
 
