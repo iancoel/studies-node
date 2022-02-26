@@ -1,27 +1,24 @@
-const path = require('path');
+const path = require('path')
 
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require('express')
+const bodyParser = require('body-parser')
 
-const adminData = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
+const homeData = require('./routes/home')
+const usersData = require('./routes/users')
 
-const app = express();
+const app = express()
 
-app.set('view engine', 'ejs'); //.set() allows to set any value globally on our application and we can read them with .get()
+app.set('view engine', 'ejs')
 
-app.set('views', 'views'); //if we had to chenga the default directory from where our pages are provided, we would had to change this setting
+app.set('views', 'views')
 
-app.use(bodyParser.urlencoded({ extended: false })); //this registers a middleware that will do all the body parsing
+app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use(express.static(path.join(__dirname, 'public'))); //grants read access to the folder we pass to the function
+app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/admin', adminData.routes);
-app.use(shopRoutes);
+app.use(homeData.routes)
 
-//404 page
-app.use('/', (req, res, next) => {
-  res.status(404).render('404', {pageTitle: '404 | Not Found'});
-})
+app.use(usersData.routes)
 
-app.listen(3000);
+
+app.listen(3000)

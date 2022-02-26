@@ -1,0 +1,16 @@
+<%- include('includes/head') %>
+
+<h1>Add users</h1>
+
+<%- include('includes/navigation') %>
+
+<main>
+  <form action="/users" method="POST">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name">
+
+    <button type="submit">Add user</button>
+  </form>
+</main>
+
+<%- include('includes/end') %>

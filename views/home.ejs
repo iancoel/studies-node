@@ -1,0 +1,24 @@
+<%- include('includes/head') %>
+
+<main>
+  <h1>List of users</h1>
+
+  <%- include('includes/navigation') %>
+
+  <% if (users.length > 0) { %>
+    <ul>
+
+      <% for (let user of users) { %>
+        <li><%= user.name %></li>
+        <br>
+      <% } %>
+
+    </ul>
+  <% } else { %>
+    <h2>The aren`t any users =/</h2>
+  <% } %>
+  
+</main>
+
+<%- include('includes/end') %>
+  
