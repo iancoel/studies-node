@@ -1,7 +1,7 @@
 const Product = require('../models/product')
 
 exports.getAddProduct = (req, res, next) => {
-  res.render('add-product', {
+  res.render('admin/add-product', {
     pageTitle: 'Add Product', 
     path: '/admin/add-product',
     activeAddProduct: true,
@@ -20,7 +20,7 @@ exports.postAddProduct = (req, res, next) => {
 exports.getProducts = (req, res, next) => {
   //we will pass the render method as a callback function so it can be executed after the async code inside models/product.js is done
   const products = Product.fetchAll((products) => {
-    res.render('shop', {
+    res.render('shop/product-list', {
       prods: products, 
       pageTitle: 'Shop', 
       path: '/', 
