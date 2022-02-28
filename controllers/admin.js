@@ -18,15 +18,11 @@ exports.postAddProduct = (req, res, next) => {
 }
 
 exports.getProducts = (req, res, next) => {
-  //we will pass the render method as a callback function so it can be executed after the async code inside models/product.js is done
-  const products = Product.fetchAll((products) => {
-    res.render('shop/product-list', {
+  Product.fetchAll((products) => {
+    res.render('admin/products', {
       prods: products, 
-      pageTitle: 'Shop', 
-      path: '/', 
-      hasProducts: products.length > 0,
-      activeShop: true,
-      productCSS: true
-    }) //render() will use the default template engine
+      pageTitle: 'Admin Products', 
+      path: '/admin/products',
+    })
   })
 }
