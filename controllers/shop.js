@@ -1,4 +1,5 @@
 const Product = require('../models/product')
+const Cart = require('../models/cart')
 
 exports.getProducts = (req, res, next) => {
   //we will pass the render method as a callback function so it can be executed after the async code inside models/product.js is done
@@ -42,7 +43,9 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId
-  console.log(prodId);
+  Product.findById(prodId, (product) => {
+    Cart.addProduct(prodId, product.price)
+  })
   res.redirect('/cart')
 }
 
