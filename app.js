@@ -22,11 +22,8 @@ app.use(express.static(path.join(__dirname, 'public'))); //grants read access to
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
-db.execute('SELECT * FROM products')
-.then(result => console.log(result[0]))
-.catch(err => console.warn(err))
 
-//404 page
+//404 page 
 app.use('/', errorController.get404)
 
 app.listen(3000);
