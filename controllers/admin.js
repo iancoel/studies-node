@@ -15,8 +15,8 @@ exports.postAddProduct = (req, res, next) => {
   const description = req.body.description
   const product = new Product(null, title, imageUrl, description, price)
   product.save()
-
-  res.redirect('/'); //express function for redirecting
+  .then(() => res.redirect('/'))
+  .catch(err => console.warn(err))
 }
 
 exports.getEditProduct = (req, res, next) => {
