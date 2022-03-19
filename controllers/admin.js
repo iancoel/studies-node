@@ -14,14 +14,15 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price
   const description = req.body.description
 
-  Product.create({
-    title: title,
-    price: price,
-    imageUrl: imageUrl,
-    description: description
-  })
-  .then(result => res.redirect('/admin/add-product'))
-  .catch(err => console.warn(err))
+  req.user
+    .createProduct({
+      title: title,
+      price: price,
+      imageUrl: imageUrl,
+      description: description,
+    })
+    .then(result => res.redirect('/admin/add-product'))
+    .catch(err => console.warn(err))
 }
 
 exports.getEditProduct = (req, res, next) => {
