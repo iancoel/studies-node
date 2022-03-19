@@ -21,6 +21,15 @@ app.use(bodyParser.urlencoded({ extended: false })); //this registers a middlewa
 
 app.use(express.static(path.join(__dirname, 'public'))); //grants read access to the folder we pass to the function
 
+app.use((req, res, next) => {
+  User.findByPk(1)
+  .then(user => {
+    req.user = user
+    next()
+  })
+  .catch(err => console.warn(err))
+})
+
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
@@ -32,6 +41,16 @@ Product.belongsTo(User, {constraints: true, onDelete: 'CASCADE'})
 User.hasMany(Product)
 
 sequelize
-.sync({force: true})
-.then(result => app.listen(3000))
+// .sync({force: true})
+.sync()
+.then(result => {
+  return User.findByPk(1)
+})
+.then(user => {
+  if (!user) {
+   return User.create({ name: 'Ian', email: 'test@test.com'})
+  }
+  return user
+})
+.then(user => app.listen(3000))
 .catch(err => console.warn(err))
